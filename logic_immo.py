@@ -1,7 +1,3 @@
-# Python 3.6.0
-# libraries needed
-#  html5lib-1.1
-#  beautifulsoup4-4.9.1
 import requests
 from bs4 import BeautifulSoup
 
