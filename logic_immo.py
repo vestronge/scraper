@@ -30,14 +30,14 @@ def get_offer_data(page_link):
     if not soup.find('body', {'class': 'template-offer-view'}):
         return
     offer = soup.find('section', {'class': 'navPrevPrext'})
-    data = {'offer_id': offer['data-offer-id'], 'offer_type': offer['data-mapper']}
+    data = {'offer_id': offer['data-offer-id'], 'offer_type': offer['data-mapper'], 'offer_link': page_link}
     data.update({
         k: soup.find('input', {'class': 'contact_offer_data', 'data-contact-dataname': k})['value'] for k in KEYS})
     return data
 
 
 def write_offer_data(write_path):
-    keys = ['offer_id', 'offer_type'] + KEYS
+    keys = ['offer_link', 'offer_id', 'offer_type'] + KEYS
     with open(write_path, 'w') as x:
         x.write(','.join(keys))
         x.write('\n')
