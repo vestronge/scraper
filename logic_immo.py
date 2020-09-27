@@ -15,8 +15,7 @@ def get_offer_links():
     while next_link:
         txt = requests.get(next_link['href']).content
         soup = BeautifulSoup(txt, features='lxml')
-        nn = soup.find_all('div', {'class': 'offer-block'})
-        for x in nn:
+        for x in soup.find_all('div', {'class': 'offer-block'}):
             yield x.find('a', {'class': 'offer-link'})['href']
             link_count += 1
         total_searches = total_searches or soup.find('input', {'name': 'nbResultats'})['value']
