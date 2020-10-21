@@ -4,3 +4,7 @@ html5lib==1.1
 soupsieve==2.0.1
 requests==2.24.0
 lxml==4.6.1
+selenium==3.141.0
+
+# https://chromedriver.storage.googleapis.com/index.html?path=2.36/
+# https://chromedriver.storage.googleapis.com/2.36/chromedriver_mac64.zip
