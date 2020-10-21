@@ -27,7 +27,7 @@ BASE_URL = 'https://www.bureauxlocaux.com'
 
 def get_offer_links():
     total_searches, link_count = None, 0
-    global MAIN_LINK
+    global MAIN_LINK, BASE_URL
     next_links = [{'href': MAIN_LINK}]
     js_regex = re.compile('<script.*?> *(.*?) *</script> *$', flags=re.S | re.I)
     ids_done, links_visited = set(), set()
@@ -55,16 +55,16 @@ def get_offer_links():
                     link_count += 1
                     ids_done.add(current_id)
         next_links.extend(soup.findAll('a', {'data-page': True}))
-    assert int(total_searches) - 2 < link_count < int(total_searches) + 2
+    print(int(total_searches) - 2 < link_count < int(total_searches) + 2)
 
 
 def get_offer_data(item_dict):
+    global BASE_URL, SEARCH_WORDS
     page_link = BASE_URL + item_dict['url']
     data = {'page_link': page_link, 'id': item_dict['id']}
     data.update({x: item_dict.get(x) for x in KEYS})
     txt = requests.get(page_link).content
     soup = BeautifulSoup(txt, features='lxml')
-    global SEARCH_WORDS
     description = soup.find('div', {'class': 'ad-description'})
     content = description.prettify()
     data.update({x.pattern: bool(x.search(content)) for x in SEARCH_WORDS})
