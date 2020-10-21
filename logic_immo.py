@@ -29,7 +29,7 @@ def get_offer_links():
             yield x.find('a', {'class': 'offer-link'})['href']
             link_count += 1
         next_link = soup.find('link', {'rel': 'next'})
-    assert int(total_searches) - 2 < link_count < int(total_searches) + 2
+    print(int(total_searches) - 2 < link_count < int(total_searches) + 2)
 
 
 def get_offer_data(page_link):
