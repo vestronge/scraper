@@ -79,8 +79,6 @@ def write_offer_data():
         x.write(','.join(keys))
         x.write('\n')
         for i, item_dict in enumerate(get_offer_links()):
-            if i > 10:
-                return
             print(f'Scraping site number {str(i).zfill(4)}, url {item_dict["url"]} ...')
             try:
                 data = get_offer_data(item_dict)
